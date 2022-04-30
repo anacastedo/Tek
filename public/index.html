@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>GitHub Profile Manager</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+
+  <body>
+    <h1>Profile and Repos Manager</h1>
+    <div class="search-area">
+    <input type="text" name="" id="username" placeholder="Enter Github Username" autocomplete="off">
+    <button onclick="getDetails();">Get Details</button>
+  </div>
+    <script>
+      function getDetails(){
+        const name=document.getElementById('username').value;
+        fetch(`https://api.github.com/users/${name}`)
+        .then( response=>response.json().then(data=>{
+            console.log(data);
+            console.log(data.login);
+            const log=data.login;
+            const create = data.created_at;
+            document.getElementById('login').textContent = log;
+            document.getElementById('created').textContent = create;
+
+            const dataToProcess = {log, create};
+            const options ={
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dataToProcess)
+            };
+            fetch('/api', options).then( response=>response.json().then(data=>{
+                console.log(data);
+
+            }));
+
+            // document.getElementById('name').innerHTML=data.name;
+            // document.getElementById('bio').innerHTML=data.bio;
+            // document.getElementById('followers').innerHTML=data.followers +" Followers";
+            // document.getElementById('following').innerHTML=data.following + " Following";
+            // document.getElementById('profile').innerHTML=`
+            // <img src="${data.avatar_url}" />
+}))
+
+};
+
+    </script>
+
+    <p>
+      Login: <span id="login"></span>
+      Created at: <span id="created"></span>
+    </p>
+  </body>
+</html>
