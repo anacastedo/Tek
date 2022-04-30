@@ -14,6 +14,8 @@
   </nav>
   <h1>Up-to-date Database Profiles</h1>
   <script>
+
+    let log;
     getData();
     async function getData() {
       const response = await fetch('/api');
@@ -30,14 +32,35 @@
         root.append(log_info);
         document.body.append(root);
       }
-
       console.log(data);
-    }
-  </script>
-  <div class="search-area">
-    <input type="text" name="" id="username" placeholder="Enter Github Username" autocomplete="off">
-        <button class="button" onclick="removeUser();">Remove User</button>
-  </div>
+    };
+
+    async function removeUser(){
+      log = document.getElementById('username').value;
+      const dataToRemove = {
+        log
+      };
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataToRemove)
+      };
+        fetch('/api_remove', options);
+        const root = document.createElement('div');
+        const log_info = document.createElement('div');
+        log_info.textContent = `Removido com êxito! Faça refresh da página.`;
+        log_info.style.cssText = `margin:1%; padding:1%; background-color:gray`;
+        root.append(log_info);
+        document.body.append(root);
+      };
+
+        </script>
+        <div class="search-area">
+          <input type="text" name="" id="username" placeholder="Enter Github Username" autocomplete="off">
+          <button class="button" onclick="removeUser();">Remove User</button>
+        </div>
 
 </body>
 
