@@ -21,12 +21,20 @@ app.get('/api', (request, response) => {
 app.post('/api', (request, response) => {
   console.log(request.body);
   const data = request.body;
+  database.find({ log: data.log }, function (err, docs) {
+		if (docs<1){
+      console.log(docs);
+      database.insert(data);
+      response.json({
+        status: 'success',
+        login: data.log,
+      });
+    }
+      else{
+      console.log('Existing Profile');
+      console.log(docs);
 
-  database.insert(data);
-  response.json({
-    status: 'success',
-    login: data.log,
-    created: data.create
+    }
+	});
 
-  });
 });

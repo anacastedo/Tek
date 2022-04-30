@@ -27,10 +27,6 @@
         log_info.textContent = `${item.log}`;
         log_info.style.cssText = `margin:1%; padding:1%; background-color:white`;
 
-
-
-        //created.textContent = `created  on: ${item.create}`;
-
         root.append(log_info);
         document.body.append(root);
       }
@@ -38,6 +34,11 @@
       console.log(data);
     }
   </script>
+  <div class="search-area">
+    <input type="text" name="" id="username" placeholder="Enter Github Username" autocomplete="off">
+        <button class="button" onclick="removeUser();">Remove User</button>
+  </div>
+
 </body>
 
 </html>
