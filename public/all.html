@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Database</title>
-    <link rel="stylesheet" href="css/styles.css">
-  </head>
-  <body>
-    <h1>Up-to-date Database Profiles</h1>
-    <script>
-      getData();
-    async function getData(){
-    const response = await fetch('/api');
-    const data = await response.json();
 
-    for (item of data){
-      const root = document.createElement ('div');
-      const log_info = document.createElement ('div');
-      const created = document.createElement ('div');
+<head>
+  <meta charset="utf-8">
+  <title>Database</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
 
-      log_info.textContent = `${item.log}`;
-      log_info.style.cssText=`margin:1%; padding:1%; background-color:white`;
-      
+<body>
+  <nav class="nav">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link active" aria-current="page" href="#">Up-to-date Database</a>
+  </nav>
+  <h1>Up-to-date Database Profiles</h1>
+  <script>
+    getData();
+    async function getData() {
+      const response = await fetch('/api');
+      const data = await response.json();
+
+      for (item of data) {
+        const root = document.createElement('div');
+        const log_info = document.createElement('div');
+        const created = document.createElement('div');
+
+        log_info.textContent = `${item.log}`;
+        log_info.style.cssText = `margin:1%; padding:1%; background-color:white`;
 
 
-      //created.textContent = `created  on: ${item.create}`;
 
-      root.append(log_info);
-      document.body.append(root);
+        //created.textContent = `created  on: ${item.create}`;
+
+        root.append(log_info);
+        document.body.append(root);
+      }
+
+      console.log(data);
     }
+  </script>
+</body>
 
-    console.log(data);
-  }
-
-    </script>
-  </body>
 </html>
