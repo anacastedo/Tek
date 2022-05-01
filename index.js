@@ -22,11 +22,15 @@ app.post('/api', (request, response) => {
   console.log(request.body);
   const data = request.body;
   database.find({ log: `${data.log}`}, function (err, docs) {
-		if (docs==[]){
-      console.log(docs);
-      if(data.log==[]){
-        console.log('Non Existing Profile');
-        console.log(docs);
+
+  //  console.log(docs.lenght);
+    console.log(docs.length);
+    //console.log(docs.length=='undefined');
+		if (docs.length!=='undefined'){
+      //console.log(docs);
+      if(data.log===docs[0].log){
+        console.log('Profile Already Exists');
+        //console.log(docs);
       }
       else{
       database.insert(data);
@@ -36,8 +40,8 @@ app.post('/api', (request, response) => {
       });
     }}
       else{
-      console.log('Existing Profile');
-      console.log(docs);
+      console.log('Non Existing Profile');
+    //  console.log(docs);
 
     }
 	});

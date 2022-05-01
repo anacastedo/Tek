@@ -5,6 +5,10 @@
   <meta charset="utf-8">
   <title>Database</title>
   <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,700;0,800;1,100&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -50,7 +54,7 @@
         fetch('/api_remove', options);
         const root = document.createElement('div');
         const log_info = document.createElement('div');
-        log_info.textContent = `Removido com êxito! Faça refresh da página.`;
+        log_info.textContent = `Successfully Removed! Refresh the page to update.`;
         log_info.style.cssText = `margin:1%; padding:1%; background-color:gray`;
         root.append(log_info);
         document.body.append(root);
@@ -61,6 +65,12 @@
           <input type="text" name="" id="username" placeholder="Enter Github Username" autocomplete="off">
           <button class="button" onclick="removeUser();">Remove User</button>
         </div>
+        <br>
+        <br>
+      
+        </div>
+
+
 
 </body>
 

@@ -5,7 +5,10 @@
   <meta charset="utf-8">
   <title>GitHub Profile Manager</title>
   <link rel="stylesheet" href="css/styles.css">
-
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,700;0,800;1,100&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -37,7 +40,7 @@
     </div>
   </div>
   <script>
-    let name;
+    let data, data2, name, repo_names = [], dataToProcess, dataToSend, options;
 
     function getDetails() {
       document.getElementById('output').style.display = "block";
@@ -56,11 +59,10 @@
     };
 
     function addUser() {
-      name = document.getElementById('username').value;
-      fetch(`https://api.github.com/users/${name}`)
+      username = document.getElementById('username').value;
+      fetch(`https://api.github.com/users/${username}`)
         .then(response => response.json().then(data => {
           console.log(data);
-          console.log(data.login);
           const name = data.name;
           const bio = data.bio;
           const followers = data.followers;
@@ -75,31 +77,41 @@
           document.getElementById('following').textContent = data.following + " Following";
           document.getElementById('repos').textContent = data.public_repos + " Public Repos";
           document.getElementById('profile').src = data.avatar_url;
+          dataToProcess = {name, bio, followers, following, repos, profile, log};
+        }));
+
+      fetch(`https://api.github.com/users/${username}/repos`)
+        .then(response => response.json().then(data2 => {
+          let repos_length = data2.length;
+          dataToSend = JSON.stringify(dataToProcess);
+          dataToProcess = JSON.parse(dataToSend);
+
+          let j = 0;
+          while (j < repos_length) {
+            for (i = 0; i < repos_length; i++) {
+              repo_names[i] = data2[i].full_name;
+              console.log(repo_names[i]);
+              dataToProcess["repo[" + i + "]"] = repo_names[i];
+              j++;
+            };
+            dataToProcess["repos_length"] = repos_length;
+            console.log(dataToProcess);
 
 
-
-          const dataToProcess = {
-            name,
-            bio,
-            followers,
-            following,
-            repos,
-            profile,
-            log
+            options = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dataToProcess)
+            };
+            if (j => length) {
+              fetch('/api', options).then(response => response.json().then(data => {
+                console.log("Success" + data);
+              }));
+            };
           };
-          const options = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dataToProcess)
-          };
-          fetch('/api', options).then(response => response.json().then(data => {
-            console.log(data);
-
-          }));
-
-        }))
+        }));
 
     };
   </script>

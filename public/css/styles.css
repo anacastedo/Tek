@@ -6,9 +6,13 @@ html {
 
 body {
   text-align: center;
-  padding: 4% 20% 20%;
+  padding: 4% 5% 15% 5%;
+  font-family: 'Monserrat', sans-serif;
 }
 
+h1{
+  font-size: 2.5rem;
+}
 a {
   padding-left: 10px;
   color: gray;
@@ -24,6 +28,7 @@ ul {
   text-align: left;
   line-height: 3.5;
   list-style-type: none;
+  color:white;
 }
 
 img {
@@ -35,9 +40,10 @@ img {
 
 nav {
   padding: 0;
-  padding-bottom: 30%;
+  padding-bottom: 20%;
   margin: 0;
   text-align: right;
+  font-size: 1.5rem;
 }
 
 input {
