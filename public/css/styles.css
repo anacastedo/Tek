@@ -20,7 +20,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+a:hover, .active {
   color: #A683E3;
 }
 
@@ -54,7 +54,7 @@ input {
 }
 
 td{
-  margin:0;
+  margin-bottom:2px;
   padding: 0;
   border:0;
   border-spacing: 0;
@@ -109,24 +109,37 @@ tr{
 
 }
 
+.image_GitHub{
+  position: relative;
+  max-width: 120px;
+  max-height: 120px;
+  mix-blend-mode: multiply;
+  background-color: transparent;
+  background-image: none;
+
+}
+
+
 .user_c{
   margin:1.5rem 2px;
 }
 
-#db_table{
-width:100%;
-border-spacing: 0;
-border-collapse: collapse;
-margin-bottom: 40px;
-
+#db_table, #c_table{
+width:50%;
+border-spacing: 0 1px;
+margin:auto;
 
 }
 
-#row{
+
+
+
+
+.c_row{
 margin:3px 0;
 width:100%;
-border-color: transparent;
-border-width: 2px;
+border-color: #A683E3;
+border-width: 10px;
 padding:4px;
 size:3px;
 height:2px;

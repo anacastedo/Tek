@@ -15,33 +15,45 @@
       <a class="nav-link" href="all.html">Database</a>
       <a class="nav-link active" aria-current="page" href="#">Compare</a>
     </nav>
+    <h1>Profile Comparison</h1>
     <div class="search-area">
       <input type="text" name="" class="user_c" id="username1" placeholder="Enter Github Username1" autocomplete="off">
       <input type="text" name="" class="user_" id="username2" placeholder="Enter Github Username2" autocomplete="off">
-      <button class="button" onclick="retrieveUsers();">Compare Both</button>
+      <button class="button" onclick="getDataToCompare();">Compare Both</button>
     </div>
+
+
+
 <script>
-  let log;
+  let log, i=0;
   getData();
   async function getData() {
     const response = await fetch('/api');
     const data = await response.json();
 
+    const c_table = document.createElement('table');
+    c_table.setAttribute("id","c_table");
+    document.body.appendChild(c_table);
+
+
     for (item of data) {
-      const table = document.createElement('table');
-      table.setAttribute("id","db_table");
-      document.body.appendChild(table);
-      const row=document.createElement('tr');
-      row.setAttribute("id", "row");
-      document.getElementById("db_table").appendChild(row);
-      const column1=document.createElement("td");
-      const log_info = document.createTextNode(`Username: ${item.log}`);
-      column1.appendChild(log_info);
-      document.getElementById("db_table").appendChild(column1);
-      const column2=document.createElement("td");
-      const name_info = document.createTextNode(`Name: ${item.name}`);
-      column2.appendChild(name_info);
-      document.getElementById("db_table").appendChild(column2);
+      i++;
+      const c_row=document.createElement('tr');
+      c_row.setAttribute("id", `c_row_${i}`);
+      c_row.className=`c_row`;
+      document.getElementById("c_table").appendChild(c_row);
+      const column1_c=document.createElement('td');
+      column1_c.className=`column1`;
+      const log_info_c = document.createTextNode(`Username: ${item.log}`);
+      column1_c.appendChild(log_info_c);
+      document.getElementById(`c_row_${i}`).appendChild(column1_c);
+      const column2_c=document.createElement('td');
+      column2_c.className=`column2`;
+      const name_info_c = document.createTextNode(`Name: ${item.name}`);
+      column2_c.appendChild(name_info_c);
+      document.getElementById(`c_row_${i}`).appendChild(column2_c);
+    //
+
 
 
       // root.className=`root`;
@@ -51,8 +63,7 @@
       // name.textContent = `${item.name}`;
       // name.style.cssText = `margin:1%; padding:1%; background-color:white`;
       // name.className=`name_info`;
-       column1.className=`column1`;
-       column2.className=`column2`;
+
 
 
       // root.append(table, row, column1, log_info, column2, name);
@@ -61,7 +72,7 @@
     console.log(data);
   };
 
-  function getDataforCompare() {
+  function getDataToCompare() {
     username1 = document.getElementById('username1').value;
     username2 = document.getElementById('username2').value;
   let usernames={username1, username2};

@@ -14,33 +14,35 @@
 <body>
   <nav class="nav">
     <a class="nav-link" href="index.html">Home</a>
-    <a class="nav-link active" aria-current="page" href="#">Up-to-date Database</a>
+    <a class="nav-link active" aria-current="page" href="#">Database</a>
     <a class="nav-link" href="compare.html">Compare</a>
   </nav>
   <h1>Up-to-date Database Profiles</h1>
   <script>
 
-    let log;
+    let log, i=0;
     getData();
     async function getData() {
       const response = await fetch('/api');
       const data = await response.json();
 
+      const table = document.createElement('table');
+      table.setAttribute("id","db_table");
+      document.body.appendChild(table);
+
       for (item of data) {
-        const table = document.createElement('table');
-        table.setAttribute("id","db_table");
-        document.body.appendChild(table);
-        const row=document.createElement('tr');
-        row.setAttribute("id", "row");
+        i++;
+        const row=document.createElement("tr");
+        row.setAttribute("id", `row_${i}`);
         document.getElementById("db_table").appendChild(row);
         const column1=document.createElement("td");
         const log_info = document.createTextNode(`Username: ${item.log}`);
         column1.appendChild(log_info);
-        document.getElementById("db_table").appendChild(column1);
+        document.getElementById(`row_${i}`).appendChild(column1);
         const column2=document.createElement("td");
         const name_info = document.createTextNode(`Name: ${item.name}`);
         column2.appendChild(name_info);
-        document.getElementById("db_table").appendChild(column2);
+        document.getElementById(`row_${i}`).appendChild(column2);
 
 
         // root.className=`root`;
