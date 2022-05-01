@@ -27,6 +27,10 @@ app.post('/api', (request, response) => {
     console.log(docs.length);
     //console.log(docs.length=='undefined');
 		if (docs.length!=='undefined'){
+      if(docs.length===0){
+      database.insert(data);
+      }
+      else{
       //console.log(docs);
       if(data.log===docs[0].log){
         console.log('Profile Already Exists');
@@ -38,6 +42,7 @@ app.post('/api', (request, response) => {
         status: 'success',
         login: data.log,
       });
+    };
     }}
       else{
       console.log('Non Existing Profile');
@@ -46,6 +51,15 @@ app.post('/api', (request, response) => {
     }
 	});
 
+});
+
+app.post('/compare', (request, response) => {
+  console.log(request.body);
+  const data = request.body;
+  database.find({ log: `${data.log}`}, function (err, docs) {
+
+      response.json(docs);
+	});
 });
 
 app.post('/api_remove', (request, response) => {

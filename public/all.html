@@ -15,6 +15,7 @@
   <nav class="nav">
     <a class="nav-link" href="index.html">Home</a>
     <a class="nav-link active" aria-current="page" href="#">Up-to-date Database</a>
+    <a class="nav-link" href="compare.html">Compare</a>
   </nav>
   <h1>Up-to-date Database Profiles</h1>
   <script>
@@ -26,15 +27,35 @@
       const data = await response.json();
 
       for (item of data) {
-        const root = document.createElement('div');
-        const log_info = document.createElement('div');
-        const created = document.createElement('div');
+        const table = document.createElement('table');
+        table.setAttribute("id","db_table");
+        document.body.appendChild(table);
+        const row=document.createElement('tr');
+        row.setAttribute("id", "row");
+        document.getElementById("db_table").appendChild(row);
+        const column1=document.createElement("td");
+        const log_info = document.createTextNode(`Username: ${item.log}`);
+        column1.appendChild(log_info);
+        document.getElementById("db_table").appendChild(column1);
+        const column2=document.createElement("td");
+        const name_info = document.createTextNode(`Name: ${item.name}`);
+        column2.appendChild(name_info);
+        document.getElementById("db_table").appendChild(column2);
 
-        log_info.textContent = `${item.log}`;
-        log_info.style.cssText = `margin:1%; padding:1%; background-color:white`;
 
-        root.append(log_info);
-        document.body.append(root);
+        // root.className=`root`;
+        // log_info.textContent = `${item.log}`;
+        // log_info.style.cssText = `margin:1%; padding:1%; background-color:white`;
+        // log_info.className=`log_info`
+        // name.textContent = `${item.name}`;
+        // name.style.cssText = `margin:1%; padding:1%; background-color:white`;
+        // name.className=`name_info`;
+         column1.className=`column1`;
+         column2.className=`column2`;
+
+
+        // root.append(table, row, column1, log_info, column2, name);
+        // document.body.append(root);
       }
       console.log(data);
     };
@@ -67,7 +88,7 @@
         </div>
         <br>
         <br>
-      
+
         </div>
 
 

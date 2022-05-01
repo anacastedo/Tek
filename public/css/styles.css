@@ -43,7 +43,7 @@ nav {
   padding-bottom: 20%;
   margin: 0;
   text-align: right;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 input {
@@ -51,6 +51,21 @@ input {
   text-align: center;
   border-radius: 10px;
 
+}
+
+td{
+  margin:0;
+  padding: 0;
+  border:0;
+  border-spacing: 0;
+
+}
+
+tr{
+  margin:3px 0;
+  padding: 10%;
+  border:10px;
+  border-spacing: 0;
 }
 
 .all_profiles {
@@ -83,4 +98,36 @@ input {
 .button:active {
   position: relative;
   top: 1px;
+}
+
+
+.column1, .column2{
+  background-color: white;
+  border:10px;
+  text-align: left;
+  width:50%;
+
+}
+
+.user_c{
+  margin:1.5rem 2px;
+}
+
+#db_table{
+width:100%;
+border-spacing: 0;
+border-collapse: collapse;
+margin-bottom: 40px;
+
+
+}
+
+#row{
+margin:3px 0;
+width:100%;
+border-color: transparent;
+border-width: 2px;
+padding:4px;
+size:3px;
+height:2px;
 }
