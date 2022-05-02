@@ -18,50 +18,8 @@
     <a class="nav-link" href="compare.html">Compare</a>
   </nav>
   <h1>Up-to-date Database Profiles</h1>
+  <script src="getdata.js"></script>
   <script>
-
-    let log, i=0;
-    getData();
-    async function getData() {
-      const response = await fetch('/api');
-      const data = await response.json();
-
-      const table = document.createElement('table');
-      table.setAttribute("id","db_table");
-      document.body.appendChild(table);
-
-      for (item of data) {
-        i++;
-        const row=document.createElement("tr");
-        row.setAttribute("id", `row_${i}`);
-        document.getElementById("db_table").appendChild(row);
-        const column1=document.createElement("td");
-        const log_info = document.createTextNode(`Username: ${item.log}`);
-        column1.appendChild(log_info);
-        document.getElementById(`row_${i}`).appendChild(column1);
-        const column2=document.createElement("td");
-        const name_info = document.createTextNode(`Name: ${item.name}`);
-        column2.appendChild(name_info);
-        document.getElementById(`row_${i}`).appendChild(column2);
-
-
-        // root.className=`root`;
-        // log_info.textContent = `${item.log}`;
-        // log_info.style.cssText = `margin:1%; padding:1%; background-color:white`;
-        // log_info.className=`log_info`
-        // name.textContent = `${item.name}`;
-        // name.style.cssText = `margin:1%; padding:1%; background-color:white`;
-        // name.className=`name_info`;
-         column1.className=`column1`;
-         column2.className=`column2`;
-
-
-        // root.append(table, row, column1, log_info, column2, name);
-        // document.body.append(root);
-      }
-      console.log(data);
-    };
-
     async function removeUser(){
       log = document.getElementById('username').value;
       const dataToRemove = {
@@ -78,7 +36,7 @@
         const root = document.createElement('div');
         const log_info = document.createElement('div');
         log_info.textContent = `Successfully Removed! Refresh the page to update.`;
-        log_info.style.cssText = `margin:1%; padding:1%; background-color:gray`;
+        log_info.style.cssText = `margin:1%; padding:1%;`;
         root.append(log_info);
         document.body.append(root);
       };
