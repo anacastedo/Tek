@@ -53,12 +53,19 @@ app.post('/api', (request, response) => {
 
 });
 
-app.post('/compare', (request, response) => {
+app.post('/compare1', (request, response) => {
   console.log(request.body);
   const data = request.body;
-  database.find({ log: `${data.log}`}, function (err, docs) {
+  database.find({ log: `${data.username1}`}, function (err, docs) {
+  response.json(docs);
+	});
+});
 
-      response.json(docs);
+app.post('/compare2', (request, response) => {
+  console.log(request.body);
+  const data = request.body;
+  database.find({ log: `${data.username2}`}, function (err, docs) {
+  response.json(docs);
 	});
 });
 

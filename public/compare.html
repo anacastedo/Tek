@@ -19,40 +19,44 @@
     <div class="search-area">
       <input type="text" name="" class="user_c" id="username1" placeholder="Enter Github Username1" autocomplete="off">
       <input type="text" name="" class="user_" id="username2" placeholder="Enter Github Username2" autocomplete="off">
-      <button class="button" onclick="getDataToCompare();">Compare Both</button>
+      <button class="button" onclick="getDataToCompare();">Compare</button>
+
     </div>
+  <!--  <a class="button" href="all.html">Consult Database</a> -->
+<h2 id="compare_title"></h2>
+
 
 
 
 <script>
-  let log, i=0;
-  getData();
-  async function getData() {
-    const response = await fetch('/api');
-    const data = await response.json();
-
-    const c_table = document.createElement('table');
-    c_table.setAttribute("id","c_table");
-    document.body.appendChild(c_table);
-
-
-    for (item of data) {
-      i++;
-      const c_row=document.createElement('tr');
-      c_row.setAttribute("id", `c_row_${i}`);
-      c_row.className=`c_row`;
-      document.getElementById("c_table").appendChild(c_row);
-      const column1_c=document.createElement('td');
-      column1_c.className=`column1`;
-      const log_info_c = document.createTextNode(`Username: ${item.log}`);
-      column1_c.appendChild(log_info_c);
-      document.getElementById(`c_row_${i}`).appendChild(column1_c);
-      const column2_c=document.createElement('td');
-      column2_c.className=`column2`;
-      const name_info_c = document.createTextNode(`Name: ${item.name}`);
-      column2_c.appendChild(name_info_c);
-      document.getElementById(`c_row_${i}`).appendChild(column2_c);
-    //
+  // let log, i=0;
+  // getData();
+  // async function getData() {
+  //   const response = await fetch('/api');
+  //   const data = await response.json();
+  //
+  //   const c_table = document.createElement('table');
+  //   c_table.setAttribute("id","c_table");
+  //   document.body.appendChild(c_table);
+  //
+  //
+  //   for (item of data) {
+  //     i++;
+  //     const c_row=document.createElement('tr');
+  //     c_row.setAttribute("id", `c_row_${i}`);
+  //     c_row.className=`c_row`;
+  //     document.getElementById("c_table").appendChild(c_row);
+  //     const column1_c=document.createElement('td');
+  //     column1_c.className=`column1`;
+  //     const log_info_c = document.createTextNode(`Username: ${item.log}`);
+  //     column1_c.appendChild(log_info_c);
+  //     document.getElementById(`c_row_${i}`).appendChild(column1_c);
+  //     const column2_c=document.createElement('td');
+  //     column2_c.className=`column2`;
+  //     const name_info_c = document.createTextNode(`Name: ${item.name}`);
+  //     column2_c.appendChild(name_info_c);
+  //     document.getElementById(`c_row_${i}`).appendChild(column2_c);
+  //   //
 
 
 
@@ -68,14 +72,17 @@
 
       // root.append(table, row, column1, log_info, column2, name);
       // document.body.append(root);
-    }
-    console.log(data);
-  };
-
-  function getDataToCompare() {
+  //   }
+  //   console.log(data);
+  //   console.log(data[0]);
+  //   console.log(data[0].log);
+  // };
+let options, data1, data2;
+async function getDataToCompare() {
     username1 = document.getElementById('username1').value;
     username2 = document.getElementById('username2').value;
   let usernames={username1, username2};
+
   console.log(usernames);
   console.log(JSON.stringify(usernames));
           options = {
@@ -86,12 +93,259 @@
             body: JSON.stringify(usernames)
           };
 
-            fetch('/compare', options).then(response => response.json().then(data => {
-              console.log("Success" + data);
-            }));
+const response1 = await fetch('/compare1', options);
+data1 = await response1.json();
 
-        };
+const response2 = await fetch('/compare2', options);
+data2 = await response2.json();
+output();
+      };
 
+ function output() {
+
+
+   data1=data1[0];
+   data2=data2[0];
+     // const compare_div=document.createElement('div');
+     // compare_div.setAttribute("id", "compare_div");
+     // document.body.appendChild(compare_div);
+     //
+     //       const f_table = document.createElement('table');
+     //       f_table.setAttribute("id","f_table");
+     //       document.getElementById("compare_div").appendChild(f_table);
+     //
+     //         const f_row=document.createElement('tr');
+     //         f_row.setAttribute("id", `f_row`);
+     //         f_row.className=`f_row`;
+     //         document.getElementById("f_table").appendChild(f_row);
+     //         const column1_f=document.createElement('td');
+     //         column1_f.className=`column1`;
+     //         const log_info_f = document.createTextNode(`Username: ${data1.log}`);
+     //         column1_f.appendChild(log_info_f);
+     //         document.getElementById(`f_row`).appendChild(column1_f);
+     //         const column2_f=document.createElement('td');
+     //         column2_f.className=`column2`;
+     //         const name_info_f = document.createTextNode(`Name: ${data1.name}`);
+     //         column2_f.appendChild(name_info_f);
+
+
+     //         document.getElementById(`f_row`).appendChild(column2_f);
+
+
+ //  var container = document.createDocumentFragment();
+ // var e_0 = document.createElement("div");
+ // e_0.setAttribute("class", "div_compare_total")
+ // var e_1 = document.createElement("div");
+ // e_1.setAttribute("class", "compare_div1");
+ // var e_2 = document.createElement("table");
+ // var e_3 = document.createElement("tbody");
+ // var e_4 = document.createElement("tr");
+ // var e_5 = document.createElement("td");
+ // e_5.appendChild(document.createTextNode(`Username: ${data1.log}`));
+ // e_4.appendChild(e_5);
+ // e_3.appendChild(e_4);
+ // var e_6 = document.createElement("tr");
+ // var e_7 = document.createElement("td");
+ // e_7.appendChild(document.createTextNode(`Name: ${data1.name}`));
+ // e_6.appendChild(e_7);
+ // e_3.appendChild(e_6);
+ // var e_8 = document.createElement("tr");
+ // var e_9 = document.createElement("td");
+ // e_9.appendChild(document.createTextNode(`Bio: ${data1.bio}`));
+ // e_8.appendChild(e_9);
+ // e_3.appendChild(e_8);
+ // var e_10 = document.createElement("tr");
+ // var e_11 = document.createElement("td");
+ // e_11.appendChild(document.createTextNode(`Followers: ${data1.followers}`));
+ // e_10.appendChild(e_11);
+ // e_3.appendChild(e_10);
+ // var e_12 = document.createElement("tr");
+ // var e_13 = document.createElement("td");
+ // e_13.appendChild(document.createTextNode(`Following: ${data1.following}`));
+ // e_12.appendChild(e_13);
+ // e_3.appendChild(e_12);
+ // var e_14 = document.createElement("tr");
+ // var e_15 = document.createElement("td");
+ // e_15.appendChild(document.createTextNode(`Number of public Repos: ${data1.repos}`));
+ // e_14.appendChild(e_15);
+ // e_3.appendChild(e_14);
+ // e_2.appendChild(e_3);
+ // e_1.appendChild(e_2);
+ // e_0.appendChild(e_1);
+ // var e_16 = document.createElement("div");
+ // e_16.setAttribute("class", "compare_div2");
+ // var e_17 = document.createElement("table");
+ // var e_18 = document.createElement("tbody");
+ // var e_19 = document.createElement("tr");
+ // var e_20 = document.createElement("td");
+ // e_20.appendChild(document.createTextNode(`Username: ${data2.log}`));
+ // e_19.appendChild(e_20);
+ // e_18.appendChild(e_19);
+ // var e_21 = document.createElement("tr");
+ // var e_22 = document.createElement("td");
+ // e_22.appendChild(document.createTextNode(`Name: ${data2.name}`));
+ // e_21.appendChild(e_22);
+ // e_18.appendChild(e_21);
+ // var e_23 = document.createElement("tr");
+ // var e_24 = document.createElement("td");
+ // e_24.appendChild(document.createTextNode(`Bio: ${data2.bio}`));
+ // e_23.appendChild(e_24);
+ // e_18.appendChild(e_23);
+ // var e_25 = document.createElement("tr");
+ // var e_26 = document.createElement("td");
+ // e_26.appendChild(document.createTextNode(`Followers: ${data2.followers}`));
+ // e_25.appendChild(e_26);
+ // e_18.appendChild(e_25);
+ // var e_27 = document.createElement("tr");
+ // var e_28 = document.createElement("td");
+ // e_28.appendChild(document.createTextNode(`Following: ${data2.following}`));
+ // e_27.appendChild(e_28);
+ // e_18.appendChild(e_27);
+ // var e_29 = document.createElement("tr");
+ // var e_30 = document.createElement("td");
+ // e_30.appendChild(document.createTextNode(`Number of public Repos: ${data2.repos}`));
+ // e_29.appendChild(e_30);
+ // e_18.appendChild(e_29);
+ // e_17.appendChild(e_18);
+ // e_16.appendChild(e_17);
+ // e_0.appendChild(e_16);
+ //     document.body.appendChild(e_0);
+
+var profile1=document.createElement("div");
+profile1.setAttribute("class", "profile1");
+var p_1 =document.createElement("p");
+p_1.setAttribute("class", "p_profile");
+p_1.appendChild(document.createTextNode(`Username: ${data1.log}`));
+profile1.appendChild(p_1);
+var p_1 =document.createElement("p");
+p_1.setAttribute("class", "p_profile");
+p_1.appendChild(document.createTextNode(`Name: ${data1.name}`));
+profile1.appendChild(p_1);
+var p_1 =document.createElement("p");
+p_1.setAttribute("class", "p_profile");
+p_1.appendChild(document.createTextNode(`Bio: ${data1.bio}`));
+profile1.appendChild(p_1);
+var p_1 =document.createElement("p");
+p_1.setAttribute("class", "p_profile");
+p_1.appendChild(document.createTextNode(`Followers: ${data1.followers}`));
+profile1.appendChild(p_1);
+var p_1 =document.createElement("p");
+p_1.setAttribute("class", "p_profile");
+p_1.appendChild(document.createTextNode(`Following: ${data1.following}`));
+profile1.appendChild(p_1);
+var p_1 =document.createElement("p");
+p_1.setAttribute("class", "p_profile");
+p_1.appendChild(document.createTextNode(`Number of public Repos: ${data1.repos}`));
+profile1.appendChild(p_1);
+
+
+var profile2=document.createElement("div");
+profile2.setAttribute("class", "profile2");
+var p_2 =document.createElement("p");
+p_2.setAttribute("class", "p_profile");
+p_2.appendChild(document.createTextNode(`Username: ${data2.log}`));
+profile2.appendChild(p_2);
+var p_2 =document.createElement("p");
+p_2.setAttribute("class", "p_profile");
+p_2.appendChild(document.createTextNode(`Name: ${data2.name}`));
+profile2.appendChild(p_2);
+var p_2 =document.createElement("p");
+p_2.setAttribute("class", "p_profile");
+p_2.appendChild(document.createTextNode(`Bio: ${data2.bio}`));
+profile2.appendChild(p_2);
+var p_2 =document.createElement("p");
+p_2.setAttribute("class", "p_profile");
+p_2.appendChild(document.createTextNode(`Followers: ${data2.followers}`));
+profile2.appendChild(p_2);
+var p_2 =document.createElement("p");
+p_2.setAttribute("class", "p_profile");
+p_2.appendChild(document.createTextNode(`Following: ${data2.following}`));
+profile2.appendChild(p_2);
+var p_2 =document.createElement("p");
+p_2.setAttribute("class", "p_profile");
+p_2.appendChild(document.createTextNode(`Number of public Repos: ${data2.repos}`));
+profile2.appendChild(p_2);
+
+var repos_name_f=document.createElement("div");
+repos_name_f.setAttribute("class", "repos_name1");
+
+let j=1
+     for(i=0; i<data1.repos_length; i++){
+       let repo="repo"+j;
+       j++;
+       var p1 =document.createElement("p");
+       p1.setAttribute("class", "p_repos");
+       p1.appendChild(document.createTextNode(`${repo}: ${data1[`repo[${i}]`]}`));
+       repos_name_f.appendChild(p1);
+
+     }
+j=1
+     var repos_name_s=document.createElement("div")
+     repos_name_s.setAttribute("class", "repos_name2");
+          for(i=0; i<data2.repos_length; i++){
+          var p2 =document.createElement("p");
+          p2.setAttribute("class", "p_repos");
+          p2.appendChild(document.createTextNode(`repo: ${data2[`repo[${i}]`]}`));
+          repos_name_s.appendChild(p2);
+          }
+
+var final_table=document.createElement("table");
+final_table.setAttribute("class", "final_tab");
+var row1=document.createElement("tr");
+row1.setAttribute("class", "row_1");
+var td1=document.createElement("td");
+td1.setAttribute("class", "td_1");
+td1.appendChild(profile1);
+var td2=document.createElement("td");
+td2.setAttribute("class", "td_2");
+td2.appendChild(profile2);
+row1.appendChild(td1);
+row1.appendChild(td2);
+var row2=document.createElement("tr");
+row2.setAttribute("class", "row_2");
+var td21=document.createElement("td");
+td21.appendChild(repos_name_f);
+td21.setAttribute("class", "td_1");
+var td22=document.createElement("td");
+td22.appendChild(repos_name_s);
+td22.setAttribute("class", "td_2");
+row2.appendChild(td21);
+row2.appendChild(td22);
+final_table.appendChild(row1);
+final_table.appendChild(row2);
+
+document.body.appendChild(final_table);
+// document.body.appendChild(profile1);
+// document.body.appendChild(repos_name_f);
+// document.body.appendChild(profile2);
+// document.body.appendChild(repos_name_s);
+
+
+
+
+document.getElementById("compare_title").innerHTML = "Comparison";
+
+           // const s_table = document.createElement('table');
+           // s_table.setAttribute("id","s_table");
+           // document.getElementById("compare_div").appendChild(s_table);
+           //
+           //   const s_row=document.createElement('tr');
+           //   s_row.setAttribute("id", `s_row`);
+           //   s_row.className=`s_row`;
+           //   document.getElementById("s_table").appendChild(s_row);
+           //   const column1_s=document.createElement('td');
+           //   column1_s.className=`column1`;
+           //   const log_info_s = document.createTextNode(`Username: ${data2.log}`);
+           //   column1_s.appendChild(log_info_s);
+           //   document.getElementById(`s_row`).appendChild(column1_s);
+           //   const column2_s=document.createElement('td');
+           //   column2_s.className=`column2`;
+           //   const name_info_s = document.createTextNode(`Name: ${data2.name}`);
+           //   column2_s.appendChild(name_info_s);
+           //   document.getElementById(`s_row`).appendChild(column2_s);
+
+
+ };
 
 
 </script>
