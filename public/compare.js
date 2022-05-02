@@ -1,8 +1,11 @@
 
 let options, data1, data2;
-async function getDataToCompare() {
+async function getDataToCompare(u1) {
+  if(u1==0){
   username1 = document.getElementById('username1').value;
   username2 = document.getElementById('username2').value;
+}
+
 let usernames={username1, username2};
 
 console.log(usernames);
@@ -31,6 +34,9 @@ function output() {
 
 var profile1=document.createElement("div");
 profile1.setAttribute("class", "profile1");
+var img1 =document.createElement("img");
+img1.setAttribute("src", data1.profile);
+profile1.appendChild(img1);
 var p_1 =document.createElement("p");
 p_1.setAttribute("class", "p_profile");
 p_1.appendChild(document.createTextNode(`Username: ${data1.log}`));
@@ -59,6 +65,9 @@ profile1.appendChild(p_1);
 
 var profile2=document.createElement("div");
 profile2.setAttribute("class", "profile2");
+var img2 =document.createElement("img");
+img2.setAttribute("src", data2.profile);
+profile2.appendChild(img2);
 var p_2 =document.createElement("p");
 p_2.setAttribute("class", "p_profile");
 p_2.appendChild(document.createTextNode(`Username: ${data2.log}`));
