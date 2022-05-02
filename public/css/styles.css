@@ -125,6 +125,7 @@ tr{
 }
 
 
+
 .user_c{
   margin:1.5rem 2px;
 }
@@ -165,6 +166,15 @@ margin:auto;
   border-width: thin;
 }
 
+.compare_table{
+  width:100%;
+  margin:auto;
+}
+
+.compare_row{
+  text-align: left;
+  color:gray;
+}
 
 .c_row{
 margin:3px 0;
