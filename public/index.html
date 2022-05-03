@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="utf-8">
   <title>GitHub Profile DB</title>
@@ -11,18 +12,24 @@
 </head>
 
 <body>
+  <script src="adduser.js"></script>
+  <script src="getdetails.js"></script>
+
   <nav class="nav">
     <a class="nav-link active" aria-current="page" href="#">Home</a>
     <a class="nav-link" href="all.html">Database</a>
     <a class="nav-link" href="compare.html">Compare</a>
   </nav>
+
   <img class="image_GitHub" src="images/icon.png" />
   <h1>Profile and Repos Manager</h1>
+
   <div class="search-area">
     <input type="text" name="" id="username" placeholder="Enter Github Username" autocomplete="off">
     <button class="button" onclick="getDetails();">Get Details</button>
     <button class="button" onclick="addUser();">Add User</button>
   </div>
+
   <div class="output-container" id="output">
     <div class="profile" id="profile"></div>
     <div class="username">
@@ -39,81 +46,6 @@
       </ul>
     </div>
   </div>
-  <script>
-    let data; let data2; let name; let repo_names = []; let dataToProcess; let dataToSend; let options;
-
-    function getDetails() {
-      document.getElementById('output').style.display = "block";
-      name = document.getElementById('username').value;
-      fetch(`https://api.github.com/users/${name}`)
-        .then(response => response.json().then(data1 => {
-          document.getElementById('name').innerHTML = data1.name;
-          document.getElementById('bio').innerHTML = data1.bio;
-          document.getElementById('followers').innerHTML = data1.followers + " Followers";
-          document.getElementById('following').innerHTML = data1.following + " Following";
-          document.getElementById('repos').innerHTML = data1.public_repos + " Public Repos";
-          document.getElementById('profile').innerHTML = `
-                <img src="${data1.avatar_url}" />
-                `
-        }))
-    };
-
-    function addUser() {
-      username = document.getElementById('username').value;
-      fetch(`https://api.github.com/users/${username}`)
-        .then(response => response.json().then(data => {
-          console.log(data);
-          const name = data.name;
-          const bio = data.bio;
-          const followers = data.followers;
-          const following = data.following;
-          const repos = data.public_repos;
-          const profile = data.avatar_url;
-          const log = data.login;
-          document.getElementById('name').textContent = data.name;
-          document.getElementById('bio').textContent = data.bio;
-          document.getElementById('repos').textContent = data.repos;
-          document.getElementById('followers').textContent = data.followers + " Followers";
-          document.getElementById('following').textContent = data.following + " Following";
-          document.getElementById('repos').textContent = data.public_repos + " Public Repos";
-          document.getElementById('profile').src = data.avatar_url;
-          dataToProcess = {name, bio, followers, following, repos, profile, log};
-        }));
-
-      fetch(`https://api.github.com/users/${username}/repos`)
-        .then(response => response.json().then(data2 => {
-          let repos_length = data2.length;
-          dataToSend = JSON.stringify(dataToProcess);
-          dataToProcess = JSON.parse(dataToSend);
-
-          let j = 0;
-          while (j < repos_length) {
-            for (i = 0; i < repos_length; i++) {
-              repo_names[i] = data2[i].full_name;
-              console.log(repo_names[i]);
-              dataToProcess["repo[" + i + "]"] = repo_names[i];
-              j++;
-            };
-            dataToProcess["repos_length"] = repos_length;
-            console.log(dataToProcess);
-
-
-            options = {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(dataToProcess)
-            };
-            if (j => length) {
-              fetch('/api', options).then(response => response.json().then(data => {
-                console.log("Success" + data);
-              }));
-            };
-          };
-        }));
-
-    };
-  </script>
 </body>
+
 </html>

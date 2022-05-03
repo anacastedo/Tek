@@ -5,54 +5,29 @@
   <meta charset="utf-8">
   <title>Database</title>
   <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,700;0,800;1,100&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,700;0,800;1,100&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <script src="getdata.js"></script>
+  <script src="removeuser.js"></script>
+
   <nav class="nav">
     <a class="nav-link" href="index.html">Home</a>
     <a class="nav-link active" aria-current="page" href="#">Database</a>
     <a class="nav-link" href="compare.html">Compare</a>
   </nav>
   <h1>Up-to-date Database Profiles</h1>
-  <script src="getdata.js"></script>
-  <script>
-    async function removeUser(){
-      log = document.getElementById('username').value;
-      const dataToRemove = {
-        log
-      };
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataToRemove)
-      };
-        fetch('/api_remove', options);
-        const root = document.createElement('div');
-        const log_info = document.createElement('div');
-        log_info.textContent = `Successfully Removed! Refresh the page to update.`;
-        log_info.style.cssText = `margin:1%; padding:1%;`;
-        root.append(log_info);
-        document.body.append(root);
-      };
 
-        </script>
-        <div class="search-area">
-          <input type="text" name="" id="username" placeholder="Enter Github Username" autocomplete="off">
-          <button class="button" onclick="removeUser();">Remove User</button>
-        </div>
-        <br>
-        <br>
+  <div class="search-area">
+    <input type="text" name="" id="username" placeholder="Enter Github Username" autocomplete="off">
+    <button class="button" onclick="removeUser();">Remove User</button>
+  </div><br><br>
 
-        </div>
-
-
-
+  </div>
 </body>
 
 </html>
