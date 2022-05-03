@@ -14,7 +14,7 @@ async function getData() {
     const row = document.createElement("tr");
     row.setAttribute("id", `row_${i}`);
     row.setAttribute("class", "compare_row");
-    document.getElementById("compare_table").appendChild(row);
+    document.getElementById('compare_table').appendChild(row);
 
     const input = document.createElement("input");
     input.setAttribute("id", `input_${i}`);
