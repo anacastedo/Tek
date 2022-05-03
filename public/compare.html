@@ -14,7 +14,7 @@
 <body>
   <script src="compare.js"></script>
   <script src="checkbox_compare.js"></script>
-  <script src="modalsetup.js"></script>
+
 
   <nav class="nav">
     <a class="nav-link" href="index.html">Home</a>
@@ -45,6 +45,17 @@
   </div>
 
   <h2 id="compare_title"></h2>
+<script>//modal setup
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("modalBtn");
+var span = document.getElementsByClassName("close")[0];
+
+
+btn.onclick = function() {modal.style.display = "block";}
+span.onclick = function() {modal.style.display = "none";}
+window.onclick = function(event) {
+  if (event.target == modal) {modal.style.display = "none";}
+}</script>
 
 </body>
 

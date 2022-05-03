@@ -1,5 +1,6 @@
 function addUser() {
   username = document.getElementById('username').value;
+
   fetch(`https://api.github.com/users/${username}`)
     .then(response => response.json().then(data => {
       console.log(data);
@@ -17,7 +18,15 @@ function addUser() {
       document.getElementById('following').textContent = data.following + " Following";
       document.getElementById('repos').textContent = data.public_repos + " Public Repos";
       document.getElementById('profile').src = data.avatar_url;
-      dataToProcess = {name, bio, followers, following, repos, profile, log};
+      dataToProcess = {
+        name,
+        bio,
+        followers,
+        following,
+        repos,
+        profile,
+        log
+      };
     }));
 
   fetch(`https://api.github.com/users/${username}/repos`)

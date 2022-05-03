@@ -14,65 +14,49 @@ app.get('/api', (request, response) => {
     if (err) {
       response.end();
       return;
-    }
-    response.json(data);
-  })
-})
-app.post('/api', (request, response) => {
-  console.log(request.body);
-  const data = request.body;
-  database.find({ log: `${data.log}`}, function (err, docs) {
-
-  //  console.log(docs.lenght);
-    console.log(docs.length);
-    //console.log(docs.length=='undefined');
-		if (docs.length!=='undefined'){
-      if(docs.length===0){
-      database.insert(data);
-      }
-      else{
-      //console.log(docs);
-      if(data.log===docs[0].log){
-        console.log('Profile Already Exists');
-        //console.log(docs);
-      }
-      else{
-      database.insert(data);
-      response.json({
-        status: 'success',
-        login: data.log,
-      });
     };
-    }}
-      else{
+    response.json(data);
+  });
+});
+
+
+app.post('/api', (request, response) => {
+  const data = request.body;
+
+  database.find({log: `${data.log}`}, function(err, docs) {
+    if (docs.length !== 'undefined') {
+      if (docs.length === 0) {
+        database.insert(data);
+      } else {
+        if (data.log === docs[0].log) {
+          console.log('Profile Already Exists');
+        } else {
+          database.insert(data);
+          console.log("Success!");
+        };
+      };
+    } else {
       console.log('Non Existing Profile');
-    //  console.log(docs);
-
-    }
-	});
-
+    };
+  });
 });
 
 app.post('/compare1', (request, response) => {
-  console.log(request.body);
   const data = request.body;
-  database.find({ log: `${data.username1}`}, function (err, docs) {
-  response.json(docs);
-	});
+  database.find({log: `${data.username1}`}, function(err, docs) {
+    response.json(docs);
+  });
 });
 
 app.post('/compare2', (request, response) => {
-  console.log(request.body);
   const data = request.body;
-  database.find({ log: `${data.username2}`}, function (err, docs) {
-  response.json(docs);
-	});
+  database.find({log: `${data.username2}`}, function(err, docs) {
+    response.json(docs);
+  });
 });
 
 app.post('/api_remove', (request, response) => {
-  console.log(request.body);
   const data = request.body;
-  let apagar=console.log(JSON.stringify(data.log));
-  database.remove({log: request.body.log}, {}, function(err, numRemoved){
-	});
+  let apagar = console.log(JSON.stringify(data.log));
+  database.remove({log: request.body.log}, {}, function(err, numRemoved) {});
 });

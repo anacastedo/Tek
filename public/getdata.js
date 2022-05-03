@@ -4,7 +4,7 @@ async function getData() {
   const response = await fetch('/api');
   const data = await response.json();
 
-  const table = document.createElement('table');
+  const table = document.createElement("table");
   table.setAttribute("id","db_table");
   document.body.appendChild(table);
 
@@ -12,7 +12,7 @@ async function getData() {
     i++;
     const row=document.createElement("tr");
     row.setAttribute("id", `row_${i}`);
-    document.getElementById("db_table").appendChild(row);
+    document.getElementById('db_table').appendChild(row);
     const column1=document.createElement("td");
     const log_info = document.createTextNode(`Username: ${item.log}`);
     column1.appendChild(log_info);
