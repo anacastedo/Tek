@@ -5,7 +5,7 @@ function getDetails() {
   name = document.getElementById('username').value;
   fetch(`https://api.github.com/users/${name}`)
     .then(response => response.json().then(data1 => {
-      document.getElementById('name2').innerHTML = data1.name;
+      document.getElementById('name').innerHTML = data1.name;
       document.getElementById('bio').innerHTML = data1.bio;
       document.getElementById('followers').innerHTML = data1.followers + " Followers";
       document.getElementById('following').innerHTML = data1.following + " Following";
